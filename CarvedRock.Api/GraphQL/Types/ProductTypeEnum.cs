@@ -1,12 +1,13 @@
-﻿using GraphQL.Types;
+﻿using CarvedRock.Api.Data;
+using GraphQL.Types;
 
 namespace CarvedRock.Api.GraphQL.Types
 {
-    public class ProductTypeEnum: EnumerationGraphType<ProductType>
+    public class ProductTypeEnumType: EnumerationGraphType<ProductTypeEnum>
     {
-        public ProductTypeEnum()
+        public ProductTypeEnumType()
         {
-            Name = "ProductType";
+            Name = "Type";
             Description = "The type of product";
         }
     }

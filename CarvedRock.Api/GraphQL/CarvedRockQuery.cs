@@ -8,7 +8,7 @@ namespace CarvedRock.Api.GraphQL
     {
         public CarvedRockQuery(ProductRepository productRepository)
         {
-            Field<ProductType>(
+            Field<ListGraphType<ProductType>>(
                 "products", 
                 resolve: context => productRepository.GetAll()
             );
