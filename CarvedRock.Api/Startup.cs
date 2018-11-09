@@ -29,20 +29,16 @@ namespace CarvedRock.Api
         {
             services.AddDbContext<CarvedRockDbContext>(options =>
                 options.UseSqlServer(_config["ConnectionStrings:CarvedRock"]));
+
             services.AddScoped<ProductRepository>();
             services.AddScoped<ProductReviewRepository>();
 
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<CarvedRockSchema>();
-            services.AddScoped<CarvedRockQuery>();
-            services.AddScoped<ProductType>();
-            services.AddScoped<ProductReviewType>();
-            services.AddScoped<ProductTypeEnumType>();
 
-            services.AddGraphQL(o =>
-            {
-                o.ExposeExceptions = _env.IsDevelopment();
-            });
+            services.AddGraphQL(o => { o.ExposeExceptions = _env.IsDevelopment(); })
+                .AddGraphTypes(ServiceLifetime.Scoped)
+                .AddDataLoader();
         }
 
         public void Configure(IApplicationBuilder app, CarvedRockDbContext dbContext)
