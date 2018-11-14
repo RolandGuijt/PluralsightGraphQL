@@ -1,0 +1,21 @@
+﻿@model List<CarvedRock.Web.Models.ProductModel>
+
+<div class="row">
+    <h4 class="mb-3 ml-5">Today's specials:</h4>
+</div>
+
+@foreach (var product in Model)
+{
+<div class="row">
+    <div class="col-2 text-center ml-5"><img height="80" src="Images/@product.PhotoFileName" alt="Product image" /></div>
+    <div class="col-2 my-auto"><a asp-action="ProductDetail" asp-route-productId="@product.Id">@product.Name</a></div>
+    <div class="col-2 my-auto">$@product.Price</div>
+    <div class="col-2 my-auto stars">
+        @for (var i = 0; i < @product.Rating; i++)
+        {
+            <text>*</text>
+        }
+    </div>
+    
+</div>
+}

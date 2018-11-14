@@ -1,0 +1,43 @@
+﻿@model CarvedRock.Web.Models.ProductModel
+<div class="row">
+    <div class="col-3">
+        <img height="150" src="/Images/@Model.PhotoFileName" alt="Product image" />
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <div class="col-12">
+                <h3>@Model.Name</h3>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                @Model.Description
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-3">
+                In store since: @Model.IntroducedAt.Year
+            </div>
+            <div class="col-3">
+                Stock: @Model.Stock
+            </div>
+            <div class="col-3">
+                Stars: @Model.Rating
+            </div>
+            <div class="col-3">
+                Price: $@Model.Price
+            </div>
+        </div>
+        <h6>Reviews:</h6>
+        <ul></ul>
+        @foreach (var review in Model.Reviews)
+        {
+            <div class="row">
+                <div class="col-12"><h5>@review.Title</h5></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12">@review.Review</div>
+            </div>
+        }
+    </div>
+</div>
