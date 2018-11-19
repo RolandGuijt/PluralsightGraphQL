@@ -21,9 +21,4 @@ namespace CarvedRock.Web.Models
     {
         public List<ProductModel> Products { get; set; }
     }
-
-    public class ProductContainer
-    {
-        public ProductModel Product{ get; set; }
-    }
 }

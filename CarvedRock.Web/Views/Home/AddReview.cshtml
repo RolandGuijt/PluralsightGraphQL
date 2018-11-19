@@ -1,0 +1,23 @@
+﻿@model CarvedRock.Web.Models.ProductReviewModel
+
+<h4>Add a review</h4>
+<form asp-action="AddReview">
+    <input type="hidden" asp-for="ProductId"/>
+    <div class="row mb-2 form-group">
+        <div class="col-3">
+            <label asp-for="Title"></label>
+        </div>
+        <div class="col-9">
+            <input class="form-control" type="text" asp-for="Title"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label asp-for="Review"></label>
+        </div>
+        <div class="col-9">
+            <input class="form-control" type="text" asp-for="Review"/>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
