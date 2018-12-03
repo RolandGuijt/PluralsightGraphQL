@@ -21,7 +21,7 @@ namespace CarvedRock.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var responseModel = await _httpClient.GetProducts();
-            responseModel.HandleErrors();
+            responseModel.ThrowErrors();
             return View(responseModel.Data.Products);
         }
 

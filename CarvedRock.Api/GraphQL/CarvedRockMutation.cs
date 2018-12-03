@@ -12,8 +12,8 @@ namespace CarvedRock.Api.GraphQL
             Field<ProductReviewType>(
                 "createReview",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ProductReviewInputType>> {Name = "review"}), resolve:
-                context =>
+                    new QueryArgument<NonNullGraphType<ProductReviewInputType>> {Name = "review"}), 
+                resolve: context =>
                 {
                     var review = context.GetArgument<ProductReview>("review");
                     return reviewRepository.AddReview(review);

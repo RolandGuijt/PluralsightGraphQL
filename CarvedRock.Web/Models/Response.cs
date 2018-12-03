@@ -9,7 +9,7 @@ namespace CarvedRock.Web.Models
         public T Data { get; set; }
         public List<ErrorModel> Errors { get; set; }
 
-        public void HandleErrors()
+        public void ThrowErrors()
         {
             if (Errors != null && Errors.Any())
                 throw new GraphQlException(
