@@ -1,9 +1,7 @@
 ﻿using CarvedRock.Api.Data;
 using CarvedRock.Api.GraphQL;
-using CarvedRock.Api.GraphQL.Types;
 using CarvedRock.Api.Repositories;
 using GraphQL;
-using GraphQL.Instrumentation;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +9,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProductType = CarvedRock.Api.GraphQL.Types.ProductType;
 
 namespace CarvedRock.Api
 {
@@ -36,14 +33,18 @@ namespace CarvedRock.Api
 
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<CarvedRockSchema>();
+            services.AddScoped<ReviewMessageService>();
 
             services.AddGraphQL(o => { o.ExposeExceptions = _env.IsDevelopment(); })
                 .AddGraphTypes(ServiceLifetime.Scoped).AddUserContextBuilder(httpContext => httpContext.User)
-                .AddDataLoader();
+                .AddDataLoader()
+                .AddWebSockets();
         }
 
         public void Configure(IApplicationBuilder app, CarvedRockDbContext dbContext)
         {
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<CarvedRockSchema>("/graphql");
             app.UseGraphQL<CarvedRockSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
             dbContext.Seed();

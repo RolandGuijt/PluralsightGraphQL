@@ -9,6 +9,7 @@ namespace CarvedRock.Api.GraphQL
         {
             Query = resolver.Resolve<CarvedRockQuery>();
             Mutation = resolver.Resolve<CarvedRockMutation>();
+            Subscription = resolver.Resolve<CarvedRockSubscription>();
         }
     }
 }
