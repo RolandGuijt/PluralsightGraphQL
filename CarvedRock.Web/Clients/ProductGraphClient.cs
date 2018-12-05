@@ -2,6 +2,7 @@
 using CarvedRock.Web.Models;
 using GraphQL.Client;
 using GraphQL.Common.Request;
+using GraphQL.Common.Response;
 using Newtonsoft.Json;
 
 namespace CarvedRock.Web.Clients
@@ -48,6 +49,17 @@ namespace CarvedRock.Web.Clients
             };
             var response = await _client.PostAsync(query);
             var reviewReturned = response.GetDataFieldAs<ProductReviewModel>("createReview");
+        }
+
+        public async Task SubscribeToUpdates()
+        {
+            var result = await _client.SendSubscribeAsync("subscription { reviewAdded { title productId } }");
+            result.OnReceive += Receive;
+        }
+
+        public void Receive(GraphQLResponse resp)
+        {
+            var review = resp.Data["reviewAdded"];
         }
     }
 }

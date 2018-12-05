@@ -30,7 +30,7 @@
         </div>
         <h6>Reviews:</h6>
         <ul></ul>
-        @foreach (var review in Model.Reviews)
+        @*@foreach (var review in Model.Reviews)
         {
             <div class="row">
                 <div class="col-12"><h5>@review.Title</h5></div>
@@ -38,8 +38,14 @@
             <div class="row mb-2">
                 <div class="col-12">@review.Review</div>
             </div>
-        }
+        }*@
+        <div id="reviews"></div>
         <ul></ul>
         <a asp-action="AddReview" asp-route-productId="@Model.Id">Add a review</a>
     </div>
 </div>
+<script src="https://unpkg.com/apollo-client-browser@1.9.0"></script>
+<script src="~/reviews.js"></script>
+<script>
+    renderReviews(@Model.Id);
+</script>
