@@ -57,7 +57,7 @@ namespace CarvedRock.Web.Clients
             result.OnReceive += Receive;
         }
 
-        public void Receive(GraphQLResponse resp)
+        private void Receive(GraphQLResponse resp)
         {
             var review = resp.Data["reviewAdded"];
         }

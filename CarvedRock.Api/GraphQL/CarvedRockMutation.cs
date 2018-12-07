@@ -9,15 +9,17 @@ namespace CarvedRock.Api.GraphQL
     {
         public CarvedRockMutation(ProductReviewRepository reviewRepository, ReviewMessageService messageService)
         {
-            Field<ProductReviewType>(
+            FieldAsync<ProductReviewType>(
                 "createReview",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<ProductReviewInputType>> {Name = "review"}), 
-                resolve: context =>
+               
+                resolve: async context =>
                 {
                     var review = context.GetArgument<ProductReview>("review");
-                    messageService.AddMessage(review);
-                    return reviewRepository.AddReview(review);
+                    await reviewRepository.AddReview(review);
+                    messageService.AddReviewAddedMessage(review);
+                    return review;
                 });
         }
     }

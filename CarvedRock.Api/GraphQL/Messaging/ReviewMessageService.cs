@@ -1,10 +1,8 @@
 ﻿using CarvedRock.Api.Data.Entities;
 using CarvedRock.Api.GraphQL.Messaging;
 using System;
-using System.Collections.Concurrent;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
 
 namespace CarvedRock.Api
 {
@@ -12,7 +10,7 @@ namespace CarvedRock.Api
     {
         private readonly ISubject<ReviewAddedMessage> _messageStream = new ReplaySubject<ReviewAddedMessage>(1);
 
-        public ReviewAddedMessage AddMessage(ProductReview review)
+        public ReviewAddedMessage AddReviewAddedMessage(ProductReview review)
         {
             var message = new ReviewAddedMessage
             {

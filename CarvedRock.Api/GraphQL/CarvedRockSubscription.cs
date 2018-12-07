@@ -15,9 +15,7 @@ namespace CarvedRock.Api.GraphQL
                 Name = "reviewAdded",
                 Type = typeof(ReviewAddedMessageType),
                 Resolver = new FuncFieldResolver<ReviewAddedMessage>(c => c.Source as ReviewAddedMessage),
-                Subscriber = new EventStreamResolver<ReviewAddedMessage>(c => {
-                    return messageService.GetMessages();
-                    })
+                Subscriber = new EventStreamResolver<ReviewAddedMessage>(c => messageService.GetMessages())
             });
         }
     }
