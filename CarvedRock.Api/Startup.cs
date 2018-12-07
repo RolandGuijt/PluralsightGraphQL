@@ -34,15 +34,11 @@ namespace CarvedRock.Api
 
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<CarvedRockSchema>();
-            services.AddScoped<CarvedRockQuery>();
-            services.AddScoped<ProductType>();
-            services.AddScoped<ProductReviewType>();
-            services.AddScoped<ProductTypeEnumType>();
 
             services.AddGraphQL(o =>
             {
                 o.ExposeExceptions = _env.IsDevelopment();
-            });
+            }).AddGraphTypes(ServiceLifetime.Scoped);
         }
 
         public void Configure(IApplicationBuilder app, CarvedRockDbContext dbContext)
