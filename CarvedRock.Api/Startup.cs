@@ -21,7 +21,7 @@ namespace CarvedRock.Api
             services.AddMvc();
             services.AddDbContext<CarvedRockDbContext>(options =>
                 options.UseSqlServer(_config["ConnectionStrings:CarvedRock"]));
-            services.AddSingleton<ProductRepository>();
+            services.AddScoped<ProductRepository>();
         }
 
         public void Configure(IApplicationBuilder app, CarvedRockDbContext dbContext)
