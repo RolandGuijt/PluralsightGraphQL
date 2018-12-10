@@ -19,5 +19,10 @@ namespace CarvedRock.Api.Repositories
         {
             return await _dbContext.Products.ToListAsync();
         }
+
+        public Task<Product> GetOne(int id)
+        {
+            return _dbContext.Products.SingleAsync(p => p.Id == id);
+        }
     }
 }
