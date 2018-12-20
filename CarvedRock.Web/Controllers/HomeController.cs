@@ -11,7 +11,8 @@ namespace CarvedRock.Web.Controllers
         private readonly ProductHttpClient _httpClient;
         private readonly ProductGraphClient _productGraphClient;
 
-        public HomeController(ProductHttpClient httpClient, ProductGraphClient productGraphClient)
+        public HomeController(ProductHttpClient httpClient, 
+            ProductGraphClient productGraphClient)
         {
             _httpClient = httpClient;
             _productGraphClient = productGraphClient;
