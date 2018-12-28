@@ -38,7 +38,7 @@ namespace CarvedRock.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddReview(ProductReviewModel reviewModel)
+        public async Task<IActionResult> AddReview(ProductReviewInputModel reviewModel)
         {
             await _productGraphClient.AddReview(reviewModel);
             return RedirectToAction("ProductDetail", new {productId = reviewModel.ProductId});

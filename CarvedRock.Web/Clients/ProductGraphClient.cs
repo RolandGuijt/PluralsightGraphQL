@@ -32,7 +32,7 @@ namespace CarvedRock.Web.Clients
             return response.GetDataFieldAs<ProductModel>("product");
         }
 
-        public async Task<ProductReviewModel> AddReview(ProductReviewModel review)
+        public async Task<ProductReviewModel> AddReview(ProductReviewInputModel review)
         {
             var query = new GraphQLRequest
             {
