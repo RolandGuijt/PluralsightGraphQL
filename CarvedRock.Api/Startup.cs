@@ -36,7 +36,8 @@ namespace CarvedRock.Api
             services.AddSingleton<ReviewMessageService>();
 
             services.AddGraphQL(o => { o.ExposeExceptions = _env.IsDevelopment(); })
-                .AddGraphTypes(ServiceLifetime.Scoped).AddUserContextBuilder(httpContext => httpContext.User)
+                .AddGraphTypes(ServiceLifetime.Scoped)
+                .AddUserContextBuilder(httpContext => httpContext.User)
                 .AddDataLoader()
                 .AddWebSockets();
 
