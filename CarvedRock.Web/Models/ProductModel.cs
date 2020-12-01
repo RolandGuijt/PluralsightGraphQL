@@ -16,4 +16,9 @@ namespace CarvedRock.Web.Models
         public string PhotoFileName { get; set; }
         public List<ProductReviewModel> Reviews { get; set; }
     }
+    
+    public class ProductResponse
+    {
+        public ProductModel Product { get; set; }
+    }
 }

@@ -7,4 +7,14 @@
         public string Title { get; set; }
         public string Review { get; set; }
     }
+
+    public class ProductReviewResponse
+    {
+        public ProductReviewModel CreateReview { get; set; }
+    }
+    
+    public class ProductReviewSubscriptionResponse
+    {
+        public ProductReviewModel ReviewAdded { get; set; }
+    }
 }

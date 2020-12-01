@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Security.Claims;
 using CarvedRock.Api.Data.Entities;
 using CarvedRock.Api.Repositories;
 using GraphQL.DataLoader;
@@ -20,11 +22,11 @@ namespace CarvedRock.Api.GraphQL.Types
             Field(t => t.Stock);
             Field<ProductTypeEnumType>("Type", "The type of product");
 
-            Field<ListGraphType<ProductReviewType>>(
-                "reviews",
-                resolve: context =>
+            Field<ListGraphType<ProductReviewType>, IEnumerable<ProductReview>>()
+                .Name("reviews")
+                .ResolveAsync(context =>
                 {
-                    var user = (ClaimsPrincipal) context.UserContext;
+                    var user = (ClaimsPrincipal) context.UserContext["User"];
                     var loader =
                         dataLoaderAccessor.Context.GetOrAddCollectionBatchLoader<int, ProductReview>(
                             "GetReviewsByProductId", reviewRepository.GetForProducts);

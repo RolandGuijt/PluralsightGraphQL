@@ -1,15 +1,17 @@
-﻿using GraphQL;
+﻿using System;
+using GraphQL;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace CarvedRock.Api.GraphQL
 {
     public class CarvedRockSchema: Schema
     {
-        public CarvedRockSchema(IDependencyResolver resolver): base(resolver)
+        public CarvedRockSchema(IServiceProvider serviceProvider): base(serviceProvider)
         {
-            Query = resolver.Resolve<CarvedRockQuery>();
-            Mutation = resolver.Resolve<CarvedRockMutation>();
-            Subscription = resolver.Resolve<CarvedRockSubscription>();
+            Query = serviceProvider.GetRequiredService<CarvedRockQuery>();
+            Mutation = serviceProvider.GetRequiredService<CarvedRockMutation>();
+            Subscription = serviceProvider.GetRequiredService<CarvedRockSubscription>();
         }
     }
 }

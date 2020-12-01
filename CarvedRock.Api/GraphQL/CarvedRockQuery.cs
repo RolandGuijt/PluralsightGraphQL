@@ -1,5 +1,6 @@
 ﻿using CarvedRock.Api.GraphQL.Types;
 using CarvedRock.Api.Repositories;
+using GraphQL;
 using GraphQL.Types;
 
 namespace CarvedRock.Api.GraphQL

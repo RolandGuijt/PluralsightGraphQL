@@ -1,7 +1,8 @@
-﻿using CarvedRock.Api.Data;
+﻿using System.Collections.Generic;
+using CarvedRock.Api.Data;
 using CarvedRock.Api.GraphQL;
 using CarvedRock.Api.Repositories;
-using GraphQL;
+using GraphQL.SystemTextJson;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
@@ -15,9 +16,9 @@ namespace CarvedRock.Api
     public class Startup
     {
         private readonly IConfiguration _config;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public Startup(IConfiguration config, IHostingEnvironment env)
+        public Startup(IConfiguration config, IWebHostEnvironment env)
         {
             _config = config;
             _env = env;
@@ -31,13 +32,13 @@ namespace CarvedRock.Api
             services.AddScoped<ProductRepository>();
             services.AddScoped<ProductReviewRepository>();
 
-            services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<CarvedRockSchema>();
             services.AddSingleton<ReviewMessageService>();
 
-            services.AddGraphQL(o => { o.ExposeExceptions = _env.IsDevelopment(); })
+            services.AddGraphQL()
+                .AddSystemTextJson(o => o.PropertyNameCaseInsensitive = true)
                 .AddGraphTypes(ServiceLifetime.Scoped)
-                .AddUserContextBuilder(httpContext => httpContext.User)
+                .AddUserContextBuilder(httpContext => new Dictionary<string, object>{ { "User", httpContext.User } })
                 .AddDataLoader()
                 .AddWebSockets();
 

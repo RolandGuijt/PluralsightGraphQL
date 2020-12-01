@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CarvedRock.Web.Models;
-using Newtonsoft.Json;
 
 namespace CarvedRock.Web.HttpClients
 {
@@ -21,7 +21,7 @@ namespace CarvedRock.Web.HttpClients
                 { id name price rating photoFileName } 
             }");
             var stringResult = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Response<ProductsContainer>>(stringResult);
+            return JsonSerializer.Deserialize<Response<ProductsContainer>>(stringResult, new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
         }
     }
 }
